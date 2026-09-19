@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Юра — боты, автоматизация, AI</title>
+<title>Юра — Telegram-боты, автоматизация и AI-интеграции</title>
 <style>
   :root {
     --bg: #0E1621;
@@ -22,15 +22,47 @@
     line-height: 1.5;
   }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 20px 56px; }
-  header { margin-bottom: 8px; }
-  h1 { font-size: 28px; font-weight: 700; }
-  h1 em { color: var(--accent); font-style: normal; }
-  .sub { color: var(--sub); font-size: 15px; margin-top: 6px; }
+  header { margin-bottom: 30px; }
+  h1 { font-size: 28px; font-weight: 700; line-height: 1.25; }
+  .sub { color: var(--sub); font-size: 16px; margin-top: 8px; max-width: 640px; }
+  section { margin-bottom: 40px; }
+  section > h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 3px solid var(--accent);
+  }
   .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+  }
+  .svc {
+    background: var(--card);
+    border: 1px solid var(--chip);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  .price {
+    display: inline-block;
+    background: var(--chip);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 5px 10px;
+    align-self: flex-start;
+    margin-bottom: 10px;
+  }
+  .svc h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .svc p { color: var(--sub); font-size: 14px; }
+  .cases {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    margin: 26px 0 36px;
   }
   .case {
     background: var(--card);
@@ -39,7 +71,7 @@
     padding: 14px 14px 16px;
   }
   .case img { width: 100%; display: block; border-radius: 10px; }
-  .case h2 { font-size: 16px; font-weight: 700; margin: 12px 4px 8px; }
+  .case h3 { font-size: 16px; font-weight: 700; margin: 12px 4px 8px; }
   .plaque {
     display: inline-block;
     background: var(--chip);
@@ -50,38 +82,36 @@
     padding: 5px 10px;
     margin: 0 4px;
   }
-  section { margin-bottom: 36px; }
-  section > h2 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 14px;
-  }
-  section > h2 span { color: var(--accent); }
-  .services {
-    list-style: none;
-    background: var(--card);
-    border: 1px solid var(--chip);
-    border-radius: 14px;
-    padding: 18px 22px;
-  }
-  .services li {
-    padding: 7px 0 7px 22px;
-    position: relative;
-    font-size: 15px;
-  }
-  .services li::before {
-    content: "•";
-    color: var(--accent);
-    position: absolute;
-    left: 4px;
-    font-weight: 700;
-  }
-  .services li b { font-weight: 700; }
   .note {
     color: var(--sub);
     font-size: 13.5px;
-    margin-top: 12px;
+    margin-top: 14px;
   }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    list-style: none;
+  }
+  .step {
+    background: var(--card);
+    border: 1px solid var(--chip);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .num {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 15px;
+    background: var(--chip);
+    border-radius: 8px;
+    padding: 4px 9px;
+    flex: none;
+  }
+  .step p { font-size: 14.5px; }
   .cta {
     display: block;
     text-align: center;
@@ -92,13 +122,27 @@
     font-size: 16px;
     padding: 15px 20px;
     border-radius: 10px;
+    max-width: 480px;
+    margin: 0 auto;
   }
   .cta span { color: var(--accent); }
   .cta:hover { filter: brightness(1.1); }
+  .cta-note { text-align: center; color: var(--sub); font-size: 13.5px; margin-top: 12px; }
   .foot {
     color: var(--sub);
     font-size: 12.5px;
-    margin-top: 20px;
+    margin-top: 28px;
+    border-top: 1px solid var(--chip);
+    padding-top: 16px;
+  }
+  .foot .stack { margin-top: 6px; color: var(--txt); font-size: 13px; font-weight: 600; letter-spacing: .5px; }
+  @media (max-width: 700px) {
+    .wrap { padding: 26px 14px 40px; }
+    h1 { font-size: 22px; }
+    .sub { font-size: 14.5px; }
+    section > h2 { font-size: 18px; }
+    .grid, .cases, .steps { grid-template-columns: 1fr; }
+    .cta { font-size: 15px; }
   }
 </style>
 </head>
@@ -106,42 +150,80 @@
 <div class="wrap">
 
   <header>
-    <h1>Юра — боты, автоматизация, <em>AI</em></h1>
-    <p class="sub">Telegram-боты, парсеры и автоматизация для бизнеса. AI-интеграции.</p>
+    <h1>Юра — Telegram-боты, автоматизация и AI-интеграции</h1>
+    <p class="sub">Экономлю бизнесу часы рутины каждую неделю. Под ключ: от идеи до работающего инструмента.</p>
   </header>
 
-  <div class="grid">
-    <div class="case">
-      <img src="case1_bot.png" alt="Конвейер заказов на бирже">
-      <h2>Конвейер заказов на бирже</h2>
-      <span class="plaque">рабочий инструмент, ежедневное использование</span>
-    </div>
-    <div class="case">
-      <img src="case2_shorts.png" alt="Продакшн-система вертикальных видео">
-      <h2>Продакшн-система вертикальных видео</h2>
-      <span class="plaque">система, а не разовый ролик</span>
-    </div>
-    <div class="case">
-      <img src="case3_mod.png" alt="KnoxAftermath — мод Project Zomboid">
-      <h2>KnoxAftermath — мод Project Zomboid</h2>
-      <span class="plaque">инженерия уровня продакшн</span>
-    </div>
-  </div>
-
   <section>
-    <h2>Что <span>делаю</span></h2>
-    <ul class="services">
-      <li><b>Telegram-боты</b> — приём заявок, рассылки, поддержка, интеграция с таблицами и CRM</li>
-      <li><b>Парсеры данных</b> — цены, товары, объявления с выгрузкой в Excel / Google Таблицы</li>
-      <li><b>Автоматизация рутины</b> — перенос данных между сервисами, отчёты, уведомления в Telegram</li>
-      <li><b>AI-интеграции</b> — фильтрация и обработка заявок и текстов нейросетями</li>
-    </ul>
-    <p class="note">Пример в работе: бот-парсер заказов с AI-фильтром по стеку — первый кейс выше. Пиши — отвечаю быстро.</p>
+    <h2>Услуги и цены</h2>
+    <div class="grid">
+      <div class="svc">
+        <span class="price">от 5 000 ₽</span>
+        <h3>Telegram-боты</h3>
+        <p>Приём заявок, запись клиентов, рассылки, поддержка, интеграция с таблицами и CRM. Деплой на сервер — бот работает 24/7, инструкция по управлению.</p>
+      </div>
+      <div class="svc">
+        <span class="price">от 3 000 ₽</span>
+        <h3>Парсеры данных</h3>
+        <p>Цены конкурентов, товары, объявления, контакты, отзывы — выгрузка в Excel / Google Таблицы. Обход пагинации; повторный запуск по расписанию — по договорённости.</p>
+      </div>
+      <div class="svc">
+        <span class="price">от 3 000 ₽</span>
+        <h3>Автоматизация рутины</h3>
+        <p>Перенос данных между сервисами, автозаполнение документов, генерация отчётов, уведомления в Telegram, обработка почты и файлов. Настройка на вашем компьютере или сервере.</p>
+      </div>
+      <div class="svc">
+        <span class="price">от 5 000 ₽</span>
+        <h3>AI-интеграции</h3>
+        <p>Автоответы и классификация заявок, обработка отзывов, генерация описаний товаров, умный поиск по базе документов. Тестирование на ваших данных.</p>
+      </div>
+    </div>
+    <p class="note">«От» — стартовая цифра: точная цена зависит от объёма задачи и называется после созвона.</p>
+    <p class="note">Пример в работе: бот-парсер заказов с AI-фильтром — первый кейс ниже.</p>
   </section>
 
-  <a class="cta" href="https://t.me/iconzrus">Написать в Telegram: <span>@iconzrus</span></a>
+  <section>
+    <h2>Кейсы</h2>
+    <div class="cases">
+      <div class="case">
+        <img src="case1_bot.png" alt="Конвейер заказов на бирже">
+        <h3>Конвейер заказов на бирже</h3>
+        <span class="plaque">рабочий инструмент, ежедневное использование</span>
+      </div>
+      <div class="case">
+        <img src="case2_shorts.png" alt="Продакшн-система вертикальных видео">
+        <h3>Продакшн-система вертикальных видео</h3>
+        <span class="plaque">система, а не разовый ролик</span>
+      </div>
+      <div class="case">
+        <img src="case3_mod.png" alt="KnoxAftermath — мод Project Zomboid">
+        <h3>KnoxAftermath — мод Project Zomboid</h3>
+        <span class="plaque">инженерия уровня продакшн</span>
+      </div>
+    </div>
+  </section>
 
-  <p class="foot">Кейсы на этой странице — собственные инструменты и проекты автора, а не работы на заказ.</p>
+  <section>
+    <h2>Как работаю</h2>
+    <ol class="steps">
+      <li class="step"><span class="num">1</span><p>Созвон 15 минут — разбираем вашу рутину</p></li>
+      <li class="step"><span class="num">2</span><p>КП с вариантами и вилкой цен</p></li>
+      <li class="step"><span class="num">3</span><p>Этапы: работающий кусок каждую неделю</p></li>
+      <li class="step"><span class="num">4</span><p>Сдача: инструкция + 2 недели поддержки</p></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Записаться на созвон</h2>
+    <!-- cal.com embed: заменить кнопку при подключении -->
+    <a class="cta" href="https://t.me/iconzrus">Написать в Telegram: <span>@iconzrus</span></a>
+    <p class="cta-note">Отвечаю быстро.</p>
+  </section>
+
+  <footer class="foot">
+    <p>Кейсы на этой странице — собственные инструменты и проекты автора, а не работы на заказ.</p>
+    <p class="stack">Python • API • AI</p>
+  </footer>
 
 </div>
 </body>
