@@ -69,9 +69,41 @@
     border: 1px solid var(--chip);
     border-radius: 14px;
     padding: 14px 14px 16px;
+    display: flex;
+    flex-direction: column;
   }
   .case img { width: 100%; display: block; border-radius: 10px; }
-  .case h3 { font-size: 16px; font-weight: 700; margin: 12px 4px 8px; }
+  .case h3 { font-size: 16px; font-weight: 700; margin: 12px 4px 6px; }
+  .meta {
+    color: var(--sub);
+    font-size: 12.5px;
+    margin: 0 4px 10px;
+  }
+  .pitch {
+    color: var(--txt);
+    font-size: 14px;
+    margin: 0 4px 10px;
+  }
+  .proof {
+    margin: 0 4px 12px;
+    padding-left: 18px;
+    color: var(--sub);
+    font-size: 13.5px;
+  }
+  .proof li { margin-bottom: 4px; }
+  .case-link {
+    display: inline-block;
+    background: var(--btn);
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 7px 12px;
+    margin: auto 4px 0;
+    align-self: flex-start;
+  }
+  .case-link:hover { filter: brightness(1.1); }
   .plaque {
     display: inline-block;
     background: var(--chip);
@@ -80,7 +112,8 @@
     font-weight: 600;
     border-radius: 8px;
     padding: 5px 10px;
-    margin: 0 4px;
+    margin: auto 4px 0;
+    align-self: flex-start;
   }
   .note {
     color: var(--sub);
@@ -135,6 +168,7 @@
     border-top: 1px solid var(--chip);
     padding-top: 16px;
   }
+  .foot a { color: var(--accent); }
   .foot .stack { margin-top: 6px; color: var(--txt); font-size: 13px; font-weight: 600; letter-spacing: .5px; }
   @media (max-width: 700px) {
     .wrap { padding: 26px 14px 40px; }
@@ -151,8 +185,67 @@
 
   <header>
     <h1>Юра — Telegram-боты, автоматизация и AI-интеграции</h1>
-    <p class="sub">Экономлю бизнесу часы рутины каждую неделю. Под ключ: от идеи до работающего инструмента.</p>
+    <p class="sub">Реальные системы, которые работают каждый день. Под ключ: от идеи до работающего инструмента.</p>
   </header>
+
+  <section>
+    <h2>Продукты и инженерия</h2>
+    <div class="cases">
+      <div class="case">
+        <h3>ai-food-helper</h3>
+        <p class="meta">обновлён 2026-06-10 · открытый код</p>
+        <p class="pitch">Telegram-бот с AI-вердиктами по составу продуктов: OCR + rule engine + метрики качества (/stats). Вход — фото, штрихкод или текст; вердикт — Можно / Осторожно / Не брать.</p>
+        <ul class="proof">
+          <li>Java + Spring Boot; состав распознаёт Yandex Vision OCR, данные в PostgreSQL/H2</li>
+          <li>6 команд бота: /start, /profile, /history, /stats и другие</li>
+          <li>Regression-тесты на реальных составах (CompositionSamplesTest)</li>
+        </ul>
+        <a class="case-link" href="https://github.com/iconzrus/ai-food-helper" target="_blank" rel="noopener">Смотреть код</a>
+      </div>
+      <div class="case">
+        <img src="case1_bot.png" alt="Конвейер freelance-bot: парсер биржи → AI-фильтр → отклик в Telegram">
+        <h3>freelance-bot</h3>
+        <p class="pitch">Автоматизация, которая сама ищет клиентов: парсер биржи → AI-фильтр → готовый AIDA-отклик в Telegram за минуты.</p>
+        <ul class="proof">
+          <li>Python-конвейер: парсер Kwork → AI-оценка заказа 0–10 по стеку и бюджету → AIDA-отклик → Telegram</li>
+          <li>SQLite-дедуп заявок (orders.db) и DRY_RUN-режим для безопасного прогона</li>
+          <li>Около 500 токенов на один заказ; 4 тест-скрипта</li>
+        </ul>
+        <span class="plaque">локальный инструмент</span>
+      </div>
+      <div class="case">
+        <h3>wb_audit — «Skupoy»</h3>
+        <p class="meta">обновлён 2026-06-21 · закрытый код</p>
+        <p class="pitch">Telegram-бот profit-аудита по SKU для селлеров Wildberries и Ozon.</p>
+        <ul class="proof">
+          <li>Python-бот: считает прибыль по каждому SKU</li>
+          <li>Рабочий инструмент для селлеров маркетплейсов</li>
+        </ul>
+        <span class="plaque">приватный проект</span>
+      </div>
+      <div class="case">
+        <h3>marketplace-helper</h3>
+        <p class="meta">обновлён 2025-10-13 · открытый код</p>
+        <p class="pitch">Полный стек под e-com: Spring Boot + React, расчёт маржинальности WB по каждому SKU из корпоративного Excel.</p>
+        <ul class="proof">
+          <li>Java 21 + Spring Boot 3.2 + React 18 (Vite 5) + Apache POI</li>
+          <li>Excel-импорт, сведение карточек по nmId и vendorCode</li>
+          <li>Честный MVP: WB API работает на моках</li>
+        </ul>
+        <a class="case-link" href="https://github.com/iconzrus/marketplace-helper" target="_blank" rel="noopener">Смотреть код</a>
+      </div>
+      <div class="case">
+        <h3>intensive-lecturer-platform</h3>
+        <p class="meta">обновлён 2026-07-08 · открытый код</p>
+        <p class="pitch">Образовательная платформа: интерактивный сайт-конспект Java-интенсива с локальной сборкой в 1 клик.</p>
+        <ul class="proof">
+          <li>TypeScript (Vite); вкладки тем</li>
+          <li>Офлайн-запуск в 1 клик: share-package сборка + Start.bat</li>
+        </ul>
+        <a class="case-link" href="https://github.com/iconzrus/intensive-lecturer-platform" target="_blank" rel="noopener">Смотреть код</a>
+      </div>
+    </div>
+  </section>
 
   <section>
     <h2>Услуги и цены</h2>
@@ -179,28 +272,7 @@
       </div>
     </div>
     <p class="note">«От» — стартовая цифра: точная цена зависит от объёма задачи и называется после созвона.</p>
-    <p class="note">Пример в работе: бот-парсер заказов с AI-фильтром — первый кейс ниже.</p>
-  </section>
-
-  <section>
-    <h2>Кейсы</h2>
-    <div class="cases">
-      <div class="case">
-        <img src="case1_bot.png" alt="Конвейер заказов на бирже">
-        <h3>Конвейер заказов на бирже</h3>
-        <span class="plaque">рабочий инструмент, ежедневное использование</span>
-      </div>
-      <div class="case">
-        <img src="case2_shorts.png" alt="Продакшн-система вертикальных видео">
-        <h3>Продакшн-система вертикальных видео</h3>
-        <span class="plaque">система, а не разовый ролик</span>
-      </div>
-      <div class="case">
-        <img src="case3_mod.png" alt="KnoxAftermath — мод Project Zomboid">
-        <h3>KnoxAftermath — мод Project Zomboid</h3>
-        <span class="plaque">инженерия уровня продакшн</span>
-      </div>
-    </div>
+    <p class="note">Пример в работе: бот-парсер заказов с AI-фильтром — кейс freelance-bot выше.</p>
   </section>
 
   <section>
@@ -221,7 +293,8 @@
   </section>
 
   <footer class="foot">
-    <p>Кейсы на этой странице — собственные инструменты и проекты автора, а не работы на заказ.</p>
+    <p>Все кейсы — собственные продукты и системы автора. Числа и ссылки проверяемы.</p>
+    <p>Исходники этого сайта: <a href="https://github.com/iconzrus/cases" target="_blank" rel="noopener">github.com/iconzrus/cases</a></p>
     <p class="stack">Python • API • AI</p>
   </footer>
 
