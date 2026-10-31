@@ -226,6 +226,14 @@
   .lead-magnet strong { color: var(--accent); }
   .hero-numbers { margin-top: 10px; font-size: 14.5px; font-weight: 600; }
   .hero-numbers strong { color: var(--accent); }
+  .cta-mini { color: var(--sub); font-size: 13px; margin-top: 10px; }
+  .need, .extras { color: var(--sub); font-size: 12.5px; margin: 4px 0 0; width: 100%; }
+  .mkt { width: 100%; border-collapse: collapse; max-width: 860px; font-size: 13.5px; }
+  .mkt th, .mkt td { border: 1px solid var(--chip); padding: 8px 10px; text-align: left; vertical-align: top; }
+  .mkt th { background: var(--card); color: var(--txt); font-size: 13px; }
+  .mkt td { background: var(--card); color: var(--sub); }
+  .mkt td:first-child { color: var(--txt); font-weight: 600; }
+  .mkt .mine { color: var(--accent); font-weight: 700; white-space: nowrap; }
   .foot {
     color: var(--sub);
     font-size: 12.5px;
@@ -261,6 +269,7 @@
       <li class="tag">Telegram Bot API</li>
     </ul>
     <a class="cta-inline" href="https://t.me/iconzrus">Написать в Telegram: <span>@iconzrus</span></a>
+    <p class="cta-mini">Отвечаю в течение часа в рабочее время.</p>
   </header>
 
   <section>
@@ -321,16 +330,75 @@
   </section>
 
   <section>
+    <h2>Готовые сценарии под ключ</h2>
+    <div class="cases">
+      <div class="case">
+        <h3>Бот записи клиентов под ключ</h3>
+        <p class="meta">узкий продукт на базе «Telegram-бот под ключ» · от 7 000 ₽ · 5–7 дней</p>
+        <p class="pitch"><span class="lbl">Состав.</span> Приём и запись заявок 24/7, ответы на типовые вопросы, передача заявок в таблицу или CRM; нестандартные ситуации бот передаёт человеку. Деплой на сервер и инструкция по управлению.</p>
+        <p class="digit"><strong>Правки 2 недели</strong> включены · код, сервер и доступы остаются у вас.</p>
+        <a class="case-link" href="https://t.me/iconzrus">Обсудить запись клиентов</a>
+      </div>
+      <div class="case">
+        <h3>Парсер цен конкурентов по расписанию</h3>
+        <p class="meta">узкий продукт на базе «Парсер / сбор данных» · от 5 000 ₽ · 3–4 дня</p>
+        <p class="pitch"><span class="lbl">Состав.</span> Ежедневный мониторинг цен конкурентов с сайта-источника → выгрузка в Excel / Google Таблицы, повторный запуск по расписанию. Объём и срок фиксируем после проверки доступности данных.</p>
+        <p class="digit"><strong>Правки 2 недели</strong> включены · код и данные остаются у вас.</p>
+        <a class="case-link" href="https://t.me/iconzrus">Обсудить мониторинг цен</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <h2>Услуги и цены</h2>
     <ul class="prices">
-      <li><span class="pos">Telegram-бот под ключ</span><span class="amount">от 7 000 ₽ · 5–7 дней</span></li>
-      <li><span class="pos">Парсер / сбор данных</span><span class="amount">от 5 000 ₽ · 3–4 дня</span></li>
-      <li><span class="pos">Интеграция API / обмен данными между системами</span><span class="amount">от 8 000 ₽ · 5–7 дней</span></li>
-      <li><span class="pos">Автоматизация процесса под ключ</span><span class="amount">от 9 000 ₽ · 7–10 дней</span></li>
-      <li><span class="pos">Починка / аудит существующего бота или скрипта</span><span class="amount">от 2 500 ₽ · 1–2 дня</span></li>
-      <li><span class="pos">Интеграция с 1С<span class="badge">дополнительно</span></span><span class="amount">от 12 000 ₽ · 7–10 дней</span></li>
+      <li>
+        <span class="pos">Telegram-бот под ключ</span><span class="amount">от 7 000 ₽ · 5–7 дней</span>
+        <p class="need">Нужно от вас: описание задачи своими словами — консультация и помощь с формулировкой логики входят в работу.</p>
+        <p class="extras">Дополнительно: AI-фильтр заявок · интеграция оплаты · админ-панель</p>
+      </li>
+      <li>
+        <span class="pos">Парсер / сбор данных</span><span class="amount">от 5 000 ₽ · 3–4 дня</span>
+        <p class="need">Нужно от вас: сайт-источник и список нужных полей.</p>
+        <p class="extras">Дополнительно: AI-фильтрация собранных данных · автопередача в CRM/таблицы</p>
+      </li>
+      <li>
+        <span class="pos">Интеграция API / обмен данными между системами</span><span class="amount">от 8 000 ₽ · 5–7 дней</span>
+        <p class="need">Нужно от вас: какие сервисы связать, доступы или API-документация обеих сторон.</p>
+        <p class="extras">Дополнительно: AI-обработка данных в обмене · дашборд</p>
+      </li>
+      <li>
+        <span class="pos">Автоматизация процесса под ключ</span><span class="amount">от 9 000 ₽ · 7–10 дней</span>
+        <p class="need">Нужно от вас: описание процесса — что, откуда, куда, как часто.</p>
+        <p class="extras">Дополнительно: интеграция оплаты · админ-панель</p>
+      </li>
+      <li>
+        <span class="pos">Починка / аудит существующего бота или скрипта</span><span class="amount">от 2 500 ₽ · 1–2 дня</span>
+        <p class="need">Нужно от вас: описание проблемы и доступ к коду/серверу, если есть.</p>
+        <p class="extras">Дополнительно: перенос на сервер с автозапуском · алерты о падениях в Telegram</p>
+      </li>
+      <li>
+        <span class="pos">Интеграция с 1С<span class="badge">дополнительно</span></span><span class="amount">от 12 000 ₽ · 7–10 дней</span>
+        <p class="need">Нужно от вас: какая у вас 1С и что связать (можно своими словами), пример данных или доступ в тестовый контур.</p>
+        <p class="extras">Дополнительно: расширение обмена на новые документы · дашборд по данным обмена</p>
+      </li>
     </ul>
-    <p class="note">Точная цена фиксируется до старта по объёму задачи.</p>
+    <p class="note">Точная цена фиксируется до старта по объёму задачи. В состав каждой позиции входит разработка, тестирование, деплой/настройка и инструкция по управлению.</p>
+  </section>
+
+  <section>
+    <h2>Мои цены против рынка</h2>
+    <table class="mkt">
+      <thead>
+        <tr><th>Позиция</th><th>Мой прайс</th><th>Биржи (Kwork · Profi)</th><th>Студии (лендинги)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Telegram-бот под ключ</td><td class="mine">7 000 ₽</td><td>медиана 3 000 ₽ (10 базовых кворков)</td><td>10 000–16 000 ₽</td></tr>
+        <tr><td>Интеграция API / обмен данными</td><td class="mine">8 000 ₽</td><td>2 740–3 500 ₽</td><td>32 000–40 000 ₽</td></tr>
+        <tr><td>Починка / аудит</td><td class="mine">2 500 ₽</td><td>500–1 000 ₽</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Данные 2026-10; продажи Kwork — срез 2025-02, прайсы студий — 2026-09. Источник: анализ упаковки конкурентов 2026-10-31. Позиции, по которым рыночных данных недостаточно (парсер, автоматизация, 1С), в таблицу не включены; студийных прайсов на починку в выборке нет.</p>
   </section>
 
   <section>
@@ -343,12 +411,21 @@
   </section>
 
   <section>
+    <h2>Честно: что не входит в цену и с чем я не работаю</h2>
+    <div class="how">
+      <p>В цену не входят: новые функции после приёмки, регулярное сопровождение и расходники — сервер, лимиты платных API. Это отдельно, по согласованию.</p>
+      <p>1С-интеграции — дополнительный сегмент, а не основной фокус: ядро моей работы — Java, автоматизация и интеграции API.</p>
+      <p>Если задача вне моего опыта — скажу прямо, а не возьмусь вслепую.</p>
+    </div>
+  </section>
+
+  <section>
     <h2>Обсудить задачу</h2>
     <a class="cta" href="https://t.me/iconzrus">Написать в Telegram: <span>@iconzrus</span></a>
     <div class="lead-magnet">
       <strong>Бесплатный аудит автоматизации:</strong> опишите в Telegram вашу рутину в 3–5 строк — за 1 день вернусь с планом автоматизации и точной ценой. Без оплаты и обязательств: сначала польза, потом разговор.
     </div>
-    <p class="cta-note">Правки 2 недели включены · доступы остаются у вас · цена фиксируется до старта</p>
+    <p class="cta-note">Отвечаю в течение часа в рабочее время · правки 2 недели включены · доступы остаются у вас · цена фиксируется до старта</p>
     <!-- [ВЛАДЕЛЕЦ: подключить cal.com виджет] -->
   </section>
 
