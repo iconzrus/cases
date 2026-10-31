@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Юра — Telegram-боты, автоматизация и AI-интеграции</title>
+<title>Юра — Java-разработчик: автоматизация бизнеса, интеграции API, боты</title>
 <style>
   :root {
     --bg: #0E1621;
@@ -38,27 +38,6 @@
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 16px;
   }
-  .svc {
-    background: var(--card);
-    border: 1px solid var(--chip);
-    border-radius: 14px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-  }
-  .price {
-    display: inline-block;
-    background: var(--chip);
-    color: var(--accent);
-    font-size: 13px;
-    font-weight: 700;
-    border-radius: 8px;
-    padding: 5px 10px;
-    align-self: flex-start;
-    margin-bottom: 10px;
-  }
-  .svc h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .svc p { color: var(--sub); font-size: 14px; }
   .cases {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -84,13 +63,29 @@
     font-size: 14px;
     margin: 0 4px 10px;
   }
-  .proof {
+  .pitch .lbl { color: var(--sub); font-weight: 600; }
+  .digit {
+    color: var(--txt);
+    font-size: 14px;
     margin: 0 4px 12px;
-    padding-left: 18px;
-    color: var(--sub);
-    font-size: 13.5px;
   }
-  .proof li { margin-bottom: 4px; }
+  .digit strong { color: var(--accent); }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 0 4px 12px;
+    padding: 0;
+  }
+  .tag {
+    background: var(--chip);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
   .case-link {
     display: inline-block;
     background: var(--btn);
@@ -120,6 +115,41 @@
     font-size: 13.5px;
     margin-top: 14px;
   }
+  .prices {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 720px;
+  }
+  .prices li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: var(--card);
+    border: 1px solid var(--chip);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    font-size: 14.5px;
+  }
+  .prices .pos { font-weight: 600; }
+  .prices .amount {
+    color: var(--accent);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 6px;
+    padding: 2px 7px;
+    margin-left: 8px;
+  }
   .steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -145,6 +175,15 @@
     flex: none;
   }
   .step p { font-size: 14.5px; }
+  .how {
+    background: var(--card);
+    border: 1px solid var(--chip);
+    border-radius: 14px;
+    padding: 18px;
+    font-size: 15px;
+    max-width: 760px;
+  }
+  .how p + p { margin-top: 10px; color: var(--txt); }
   .cta {
     display: block;
     text-align: center;
@@ -160,6 +199,19 @@
   }
   .cta span { color: var(--accent); }
   .cta:hover { filter: brightness(1.1); }
+  .cta-inline {
+    display: inline-block;
+    background: var(--btn);
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    margin-top: 16px;
+  }
+  .cta-inline span { color: var(--accent); }
+  .cta-inline:hover { filter: brightness(1.1); }
   .cta-note { text-align: center; color: var(--sub); font-size: 13.5px; margin-top: 12px; }
   .foot {
     color: var(--sub);
@@ -184,118 +236,109 @@
 <div class="wrap">
 
   <header>
-    <h1>Юра — Telegram-боты, автоматизация и AI-интеграции</h1>
-    <p class="sub">Реальные системы, которые работают каждый день. Под ключ: от идеи до работающего инструмента.</p>
+    <h1>Превращаю ручную рутину бизнеса в системы, которые работают сами</h1>
+    <p class="sub">Java-разработчик — интеграции API, боты, автоматизация процессов под ключ.</p>
+    <ul class="tags">
+      <li class="tag">Java 21</li>
+      <li class="tag">Spring Boot</li>
+      <li class="tag">Python</li>
+      <li class="tag">REST API</li>
+      <li class="tag">PostgreSQL</li>
+      <li class="tag">Telegram Bot API</li>
+    </ul>
+    <a class="cta-inline" href="https://t.me/iconzrus">Написать в Telegram: <span>@iconzrus</span></a>
   </header>
 
   <section>
-    <h2>Продукты и инженерия</h2>
+    <h2>Технические демо</h2>
     <div class="cases">
       <div class="case">
         <h3>ai-food-helper</h3>
-        <p class="meta">обновлён 2026-06-10 · открытый код</p>
-        <p class="pitch">Telegram-бот с AI-вердиктами по составу продуктов: OCR + rule engine + метрики качества (/stats). Вход — фото, штрихкод или текст; вердикт — Можно / Осторожно / Не брать.</p>
-        <ul class="proof">
-          <li>Java + Spring Boot; состав распознаёт Yandex Vision OCR, данные в PostgreSQL/H2</li>
-          <li>6 команд бота: /start, /profile, /history, /stats и другие</li>
-          <li>Regression-тесты на реальных составах (CompositionSamplesTest)</li>
+        <p class="meta">техническое демо · обновлён 2026-06-10 · код открыт на GitHub</p>
+        <p class="pitch"><span class="lbl">Задача.</span> Разбирать состав продукта по фото, штрихкоду или тексту и получать честный вердикт без ручного анализа.</p>
+        <p class="pitch"><span class="lbl">Решение.</span> Telegram-бот с AI-вердиктами «Можно / Осторожно / Не брать»: Yandex Vision OCR + rule engine, метрики качества (/stats), 6 команд — /start, /profile, /history и другие.</p>
+        <p class="digit"><strong>41 автотест</strong> — сборка BUILD SUCCESS; regression-тесты на реальных составах (CompositionSamplesTest).</p>
+        <ul class="tags">
+          <li class="tag">Java</li>
+          <li class="tag">Spring Boot</li>
+          <li class="tag">PostgreSQL</li>
+          <li class="tag">Telegram Bot API</li>
         </ul>
         <a class="case-link" href="https://github.com/iconzrus/ai-food-helper" target="_blank" rel="noopener">Смотреть код</a>
       </div>
       <div class="case">
         <img src="case1_bot.png" alt="Конвейер freelance-bot: парсер биржи → AI-фильтр → отклик в Telegram">
         <h3>freelance-bot</h3>
-        <p class="pitch">Автоматизация, которая сама ищет клиентов: парсер биржи → AI-фильтр → готовый AIDA-отклик в Telegram за минуты.</p>
-        <ul class="proof">
-          <li>Python-конвейер: парсер Kwork → AI-оценка заказа 0–10 по стеку и бюджету → AIDA-отклик → Telegram</li>
-          <li>SQLite-дедуп заявок (orders.db) и DRY_RUN-режим для безопасного прогона</li>
-          <li>Около 500 токенов на один заказ; 4 тест-скрипта</li>
+        <p class="meta">техническое демо · Python · локальный инструмент</p>
+        <p class="pitch"><span class="lbl">Задача.</span> Ручной поиск заказов на бирже и написание каждого отклика съедают часы.</p>
+        <p class="pitch"><span class="lbl">Решение.</span> Конвейер: парсер Kwork → AI-оценка заказа 0–10 по стеку и бюджету → готовый AIDA-отклик → Telegram. SQLite-дедуп заявок (orders.db) и DRY_RUN-режим для безопасного прогона.</p>
+        <p class="digit"><strong>≈ 500 токенов</strong> на один обработанный заказ; 4 тест-скрипта.</p>
+        <ul class="tags">
+          <li class="tag">Python</li>
+          <li class="tag">SQLite</li>
+          <li class="tag">Telegram Bot API</li>
         </ul>
         <span class="plaque">локальный инструмент</span>
       </div>
       <div class="case">
-        <h3>wb_audit — «Skupoy»</h3>
-        <p class="meta">обновлён 2026-06-21 · закрытый код</p>
-        <p class="pitch">Telegram-бот profit-аудита по SKU для селлеров Wildberries и Ozon.</p>
-        <ul class="proof">
-          <li>Python-бот: считает прибыль по каждому SKU</li>
-          <li>Рабочий инструмент для селлеров маркетплейсов</li>
-        </ul>
-        <span class="plaque">приватный проект</span>
-      </div>
-      <div class="case">
         <h3>marketplace-helper</h3>
-        <p class="meta">обновлён 2025-10-13 · открытый код</p>
-        <p class="pitch">Полный стек под e-com: Spring Boot + React, расчёт маржинальности WB по каждому SKU из корпоративного Excel.</p>
-        <ul class="proof">
-          <li>Java 21 + Spring Boot 3.2 + React 18 (Vite 5) + Apache POI</li>
-          <li>Excel-импорт, сведение карточек по nmId и vendorCode</li>
-          <li>Честный MVP: WB API работает на моках</li>
+        <p class="meta">техническое демо · обновлён 2025-10-13 · код открыт на GitHub</p>
+        <p class="pitch"><span class="lbl">Задача.</span> Сводить Excel-выгрузки маркетплейса и считать маржинальность по каждому SKU вручную.</p>
+        <p class="pitch"><span class="lbl">Решение.</span> Полный стек под e-com: импорт корпоративного Excel, сведение карточек по nmId и vendorCode, расчёт маржинальности WB по каждому SKU.</p>
+        <p class="digit"><strong>Честный MVP:</strong> интеграция с WB API работает на моках.</p>
+        <ul class="tags">
+          <li class="tag">Java 21</li>
+          <li class="tag">Spring Boot 3.2</li>
+          <li class="tag">React 18</li>
+          <li class="tag">Apache POI</li>
         </ul>
         <a class="case-link" href="https://github.com/iconzrus/marketplace-helper" target="_blank" rel="noopener">Смотреть код</a>
       </div>
-      <div class="case">
-        <h3>intensive-lecturer-platform</h3>
-        <p class="meta">обновлён 2026-07-08 · открытый код</p>
-        <p class="pitch">Образовательная платформа: интерактивный сайт-конспект Java-интенсива с локальной сборкой в 1 клик.</p>
-        <ul class="proof">
-          <li>TypeScript (Vite); вкладки тем</li>
-          <li>Офлайн-запуск в 1 клик: share-package сборка + Start.bat</li>
-        </ul>
-        <a class="case-link" href="https://github.com/iconzrus/intensive-lecturer-platform" target="_blank" rel="noopener">Смотреть код</a>
-      </div>
+    </div>
+    <p class="note">Это технические демо — собственные проекты, код открыт на GitHub, а не клиентские результаты.</p>
+  </section>
+
+  <section>
+    <h2>Как работаю</h2>
+    <div class="how">
+      <p>Разбираем задачу → фиксируем объём, срок и цену до старта → делаю, показывая промежуточные результаты → сдаю с инструкцией. Каждый этап заканчивается работающим результатом, который можно проверить.</p>
+      <p>Если задача выходит за рамки моего опыта — скажу прямо, а не возьмусь вслепую.</p>
     </div>
   </section>
 
   <section>
     <h2>Услуги и цены</h2>
-    <div class="grid">
-      <div class="svc">
-        <span class="price">от 5 000 ₽</span>
-        <h3>Telegram-боты</h3>
-        <p>Приём заявок, запись клиентов, рассылки, поддержка, интеграция с таблицами и CRM. Деплой на сервер — бот работает 24/7, инструкция по управлению.</p>
-      </div>
-      <div class="svc">
-        <span class="price">от 3 000 ₽</span>
-        <h3>Парсеры данных</h3>
-        <p>Цены конкурентов, товары, объявления, контакты, отзывы — выгрузка в Excel / Google Таблицы. Обход пагинации; повторный запуск по расписанию — по договорённости.</p>
-      </div>
-      <div class="svc">
-        <span class="price">от 3 000 ₽</span>
-        <h3>Автоматизация рутины</h3>
-        <p>Перенос данных между сервисами, автозаполнение документов, генерация отчётов, уведомления в Telegram, обработка почты и файлов. Настройка на вашем компьютере или сервере.</p>
-      </div>
-      <div class="svc">
-        <span class="price">от 5 000 ₽</span>
-        <h3>AI-интеграции</h3>
-        <p>Автоответы и классификация заявок, обработка отзывов, генерация описаний товаров, умный поиск по базе документов. Тестирование на ваших данных.</p>
-      </div>
-    </div>
-    <p class="note">«От» — стартовая цифра: точная цена зависит от объёма задачи и называется после созвона.</p>
-    <p class="note">Пример в работе: бот-парсер заказов с AI-фильтром — кейс freelance-bot выше.</p>
+    <ul class="prices">
+      <li><span class="pos">Telegram-бот под ключ</span><span class="amount">от 7 000 ₽ · 5–7 дней</span></li>
+      <li><span class="pos">Парсер / сбор данных</span><span class="amount">от 5 000 ₽ · 3–4 дня</span></li>
+      <li><span class="pos">Интеграция API / обмен данными между системами</span><span class="amount">от 8 000 ₽ · 5–7 дней</span></li>
+      <li><span class="pos">Автоматизация процесса под ключ</span><span class="amount">от 9 000 ₽ · 7–10 дней</span></li>
+      <li><span class="pos">Починка / аудит существующего бота или скрипта</span><span class="amount">от 2 500 ₽ · 1–2 дня</span></li>
+      <li><span class="pos">Интеграция с 1С<span class="badge">дополнительно</span></span><span class="amount">от 12 000 ₽ · 7–10 дней</span></li>
+    </ul>
+    <p class="note">Точная цена фиксируется до старта по объёму задачи.</p>
   </section>
 
   <section>
-    <h2>Как работаю</h2>
+    <h2>Снижение риска</h2>
     <ol class="steps">
-      <li class="step"><span class="num">1</span><p>Созвон 15 минут — разбираем вашу рутину</p></li>
-      <li class="step"><span class="num">2</span><p>КП с вариантами и вилкой цен</p></li>
-      <li class="step"><span class="num">3</span><p>Этапы: работающий кусок каждую неделю</p></li>
-      <li class="step"><span class="num">4</span><p>Сдача: инструкция + 2 недели поддержки</p></li>
+      <li class="step"><span class="num">1</span><p>Правки 2 недели включены</p></li>
+      <li class="step"><span class="num">2</span><p>Код, сервер и все доступы после сдачи остаются у вас</p></li>
+      <li class="step"><span class="num">3</span><p>Цена фиксируется до старта по объёму задачи</p></li>
     </ol>
   </section>
 
   <section>
-    <h2>Записаться на созвон</h2>
-    <!-- cal.com embed: заменить кнопку при подключении -->
+    <h2>Обсудить задачу</h2>
     <a class="cta" href="https://t.me/iconzrus">Написать в Telegram: <span>@iconzrus</span></a>
-    <p class="cta-note">Отвечаю быстро.</p>
+    <p class="cta-note">Напишите пару слов о задаче — оценю сроки и стоимость.</p>
+    <!-- [ВЛАДЕЛЕЦ: подключить cal.com виджет] -->
   </section>
 
   <footer class="foot">
-    <p>Все кейсы — собственные продукты и системы автора. Числа и ссылки проверяемы.</p>
+    <p>Все кейсы — технические демо: собственные проекты автора. Числа и ссылки проверяемы.</p>
     <p>Исходники этого сайта: <a href="https://github.com/iconzrus/cases" target="_blank" rel="noopener">github.com/iconzrus/cases</a></p>
-    <p class="stack">Python • API • AI</p>
+    <p class="stack">Java 21 · Spring Boot · Python · REST API · PostgreSQL · Telegram Bot API</p>
   </footer>
 
 </div>
