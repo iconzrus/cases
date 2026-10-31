@@ -4,437 +4,642 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Юра — Java-разработчик: автоматизация бизнеса, интеграции API, боты</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0E1621;
-    --card: #12202E;
-    --chip: #1C2C3A;
-    --accent: #64B5EF;
-    --txt: #E7EDF2;
-    --sub: #7E8C99;
-    --btn: #2B5278;
+    --bg: #0B0F14;
+    --bg-alt: #0E141B;
+    --card: #121923;
+    --chip: #1A2431;
+    --border: rgba(255,255,255,.08);
+    --border-hi: rgba(52,211,153,.45);
+    --accent: #34D399;
+    --on-accent: #052017;
+    --txt: #E8EEF3;
+    --sub: #94A3B3;
+    --glow: rgba(52,211,153,.14);
+    --f-head: 'Unbounded', 'Manrope', system-ui, sans-serif;
+    --f-body: 'Manrope', system-ui, sans-serif;
+    --f-mono: 'JetBrains Mono', 'Consolas', monospace;
+    /* clamp-шкала: все размеры текста выводятся только из этих переменных */
+    --fs-h1: clamp(26px, 3.2vw, 38px);
+    --fs-h2: clamp(19px, 2.2vw, 26px);
+    --fs-body: clamp(16px, .5vw + 13px, 17px);
+    --fs-sm: clamp(13.5px, .25vw + 12.6px, 14.5px);
+    --fs-meta: clamp(11.5px, .2vw + 11px, 12.5px);
+    --fs-mono-lg: clamp(16px, .5vw + 14.5px, 18px);
+    --fs-mono-sm: 12px;
+    --fs-chip: clamp(10.5px, .15vw + 10.2px, 11.5px);
+    --fs-idx: 13px;
+    --r-card: 16px;
+    --r-btn: 10px;
+    --r-chip: 7px;
+    --r-panel: 18px;
+    --pad-sec: clamp(48px, 6vw, 80px);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background: var(--bg);
     color: var(--txt);
-    font-family: 'Segoe UI', Arial, sans-serif;
-    line-height: 1.5;
+    font-family: var(--f-body);
+    font-size: var(--fs-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 20px 56px; }
-  header { margin-bottom: 30px; }
-  h1 { font-size: 28px; font-weight: 700; line-height: 1.25; }
-  .sub { color: var(--sub); font-size: 16px; margin-top: 8px; max-width: 640px; }
-  section { margin-bottom: 40px; }
-  section > h2 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    padding-left: 12px;
-    border-left: 3px solid var(--accent);
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 16px;
-  }
-  .cases {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-  }
-  .case {
-    background: var(--card);
-    border: 1px solid var(--chip);
-    border-radius: 14px;
-    padding: 14px 14px 16px;
-    display: flex;
-    flex-direction: column;
-  }
-  .case img { width: 100%; display: block; border-radius: 10px; }
-  .case h3 { font-size: 16px; font-weight: 700; margin: 12px 4px 6px; }
-  .meta {
-    color: var(--sub);
-    font-size: 12.5px;
-    margin: 0 4px 10px;
-  }
-  .pitch {
-    color: var(--txt);
-    font-size: 14px;
-    margin: 0 4px 10px;
-  }
-  .pitch .lbl { color: var(--sub); font-weight: 600; }
-  .digit {
-    color: var(--txt);
-    font-size: 14px;
-    margin: 0 4px 12px;
-  }
-  .digit strong { color: var(--accent); }
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    list-style: none;
-    margin: 0 4px 12px;
-    padding: 0;
-  }
-  .tag {
-    background: var(--chip);
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 6px;
-    padding: 3px 8px;
-  }
-  .case-link {
-    display: inline-block;
-    background: var(--btn);
-    color: #FFFFFF;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 700;
-    border-radius: 8px;
-    padding: 7px 12px;
-    margin: auto 4px 0;
-    align-self: flex-start;
-  }
-  .case-link:hover { filter: brightness(1.1); }
-  .plaque {
-    display: inline-block;
-    background: var(--chip);
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 8px;
-    padding: 5px 10px;
-    margin: auto 4px 0;
-    align-self: flex-start;
-  }
-  .note {
-    color: var(--sub);
-    font-size: 13.5px;
-    margin-top: 14px;
-  }
-  .prices {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-width: 720px;
-  }
-  .prices li {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
-    background: var(--card);
-    border: 1px solid var(--chip);
-    border-radius: 10px;
-    padding: 10px 14px;
-    margin-bottom: 8px;
-    font-size: 14.5px;
-  }
-  .prices .pos { font-weight: 600; }
-  .prices .amount {
-    color: var(--accent);
-    font-weight: 700;
-    white-space: nowrap;
-  }
-  .badge {
+  ::selection { background: var(--accent); color: var(--on-accent); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding-inline: 20px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  svg { flex: none; }
+
+  /* ---------- Типографика ---------- */
+  h1 { font-family: var(--f-head); font-weight: 700; font-size: var(--fs-h1); line-height: 1.15; letter-spacing: -.01em; }
+  h2 { font-family: var(--f-head); font-weight: 600; font-size: var(--fs-h2); line-height: 1.2; }
+  h3 { font-family: var(--f-body); font-weight: 500; font-size: var(--fs-body); }
+
+  /* ---------- Кнопки ---------- */
+  .btn-solid {
     display: inline-block;
     background: var(--accent);
-    color: var(--bg);
-    font-size: 11px;
+    color: var(--on-accent);
+    font-family: var(--f-body);
     font-weight: 700;
+    border-radius: var(--r-btn);
+    text-decoration: none;
+    transition: filter .18s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-solid:hover { filter: brightness(1.08); text-decoration: none; }
+    .case-link:hover { background: rgba(52,211,153,.08); text-decoration: none; }
+  }
+  .handle { font-family: var(--f-mono); font-weight: 600; }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    width: 600px; height: 600px;
+    right: -140px; top: -220px;
+    background: radial-gradient(circle, var(--glow), transparent 65%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
+    gap: 44px;
+    align-items: center;
+    padding-block: clamp(52px, 6.5vw, 84px) clamp(52px, 6.5vw, 84px);
+  }
+  .hero-left { min-width: 0; }
+  .hero .sub { color: var(--sub); font-size: var(--fs-body); margin-top: 12px; max-width: 560px; }
+  .hero-numbers {
+    margin-top: 18px;
+    font-family: var(--f-mono);
+    font-weight: 600;
+    font-size: var(--fs-mono-lg);
+    color: var(--txt);
+  }
+  .hero-numbers strong { color: var(--accent); font-weight: 700; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin-top: 18px; }
+  .tag {
+    background: var(--chip);
+    color: var(--sub);
+    font-family: var(--f-mono);
+    font-weight: 600;
+    font-size: var(--fs-chip);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    border-radius: var(--r-chip);
+    padding: 5px 9px;
+  }
+  .cta-inline { margin-top: 24px; font-size: 15px; padding: 14px 22px; }
+  .cta-mini { color: var(--sub); font-size: var(--fs-meta); margin-top: 12px; }
+
+  /* ---------- Терминал (hero, вариант A) ---------- */
+  .term {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.4);
+    overflow: hidden;
+    font-family: var(--f-mono);
+  }
+  .term-bar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,.02);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.18); flex: none; }
+  .dot-ok { background: var(--accent); }
+  .term-name {
+    margin-left: auto;
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--sub);
+    font-size: 11px;
+    letter-spacing: .04em;
+  }
+  .term-body { padding: 14px 16px 16px; font-size: 13px; line-height: 1.95; color: var(--txt); }
+  .t-line { margin: 0; white-space: nowrap; }
+  .t-dim { color: var(--sub); }
+  .ok { color: var(--accent); font-weight: 700; }
+  .cursor { display: inline-block; color: var(--accent); font-weight: 700; animation: blink 1.1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- Секции: ритм base/band ---------- */
+  .sec { position: relative; }
+  .sec > .wrap { padding-block: var(--pad-sec); }
+  .sec-band { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .sec-base + .sec-base::before,
+  main > .sec-base:first-child::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.14) 20%, rgba(255,255,255,.14) 80%, transparent);
+  }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; }
+  .sec-idx { font-family: var(--f-mono); font-weight: 600; font-size: var(--fs-idx); color: var(--sub); letter-spacing: .1em; }
+  .note { color: var(--sub); font-size: var(--fs-meta); margin-top: 16px; max-width: 720px; }
+
+  /* ---------- Карточки-кейсы ---------- */
+  .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; }
+  .cases-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .case {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .case:has(.case-link):hover {
+      transform: translateY(-3px);
+      border-color: var(--border-hi);
+      box-shadow: 0 12px 32px rgba(0,0,0,.35), 0 0 24px var(--glow);
+    }
+  }
+  .chip-demo {
+    align-self: flex-start;
+    background: var(--chip);
+    color: var(--sub);
+    font-family: var(--f-mono);
+    font-weight: 600;
+    font-size: var(--fs-chip);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    border-radius: var(--r-chip);
+    padding: 5px 9px;
+  }
+  .case h3 { margin-top: 14px; }
+  .case .meta { color: var(--sub); font-size: var(--fs-meta); line-height: 1.5; margin-top: 10px; }
+  .price-hi { font-family: var(--f-mono); font-weight: 700; font-size: 16px; color: var(--accent); white-space: nowrap; }
+  .pitch { color: var(--txt); font-size: var(--fs-sm); margin-top: 8px; }
+  .pitch .lbl { color: var(--sub); font-weight: 500; }
+  .digit { color: var(--txt); font-size: var(--fs-sm); margin-top: 8px; }
+  .digit strong { font-family: var(--f-mono); font-weight: 700; color: var(--accent); }
+  .case .tags { margin-top: 12px; }
+  .case-link {
+    display: inline-block;
+    border: 1px solid var(--border-hi);
+    color: var(--accent);
+    background: transparent;
+    font-size: 13.5px;
+    font-weight: 500;
+    border-radius: var(--r-btn);
+    padding: 12px 16px;
+    margin-top: auto;
+    align-self: flex-start;
+    text-decoration: none;
+    transition: background .18s ease;
+  }
+  .case .tags { margin-bottom: 14px; }
+
+  /* ---------- Окно-рамка для PNG ---------- */
+  .win {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 26px rgba(0,0,0,.28);
+  }
+  .win-bar { display: flex; gap: 6px; padding: 9px 12px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.02); }
+  .win-img { display: block; width: 100%; height: auto; max-width: 100%; filter: brightness(.92); }
+
+  /* ---------- Панель-манифест «Как работаю» ---------- */
+  .how {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    padding: 24px;
+    max-width: 720px;
+  }
+  .how-lead { display: flex; gap: 14px; align-items: flex-start; }
+  .how-ico {
+    flex: none;
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--chip);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .how-lead p { font-size: var(--fs-body); }
+  .how-sep { font-family: var(--f-mono); color: var(--sub); letter-spacing: .5em; font-size: var(--fs-mono-sm); margin: 14px 0; }
+  .how-more { color: var(--txt); }
+
+  /* ---------- «Честно»: скромная dashed-панель ---------- */
+  .how.honest { background: transparent; border: 1px dashed rgba(255,255,255,.16); max-width: 760px; }
+  .how.honest p { color: var(--sub); font-size: var(--fs-sm); }
+  .how.honest p + p { margin-top: 10px; }
+
+  /* ---------- Услуги и цены ---------- */
+  .prices { list-style: none; max-width: 760px; display: flex; flex-direction: column; gap: 10px; }
+  .prices li {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 2px solid rgba(255,255,255,.14);
+    border-radius: var(--r-card);
+    padding: 16px 20px;
+  }
+  .price-flag {
+    border-color: rgba(52,211,153,.30);
+    border-left: 2px solid var(--accent);
+    box-shadow: 0 0 28px var(--glow);
+    padding: 22px 24px;
+  }
+  .price-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .pos { font-weight: 500; }
+  .amount { font-family: var(--f-mono); font-weight: 700; font-size: var(--fs-mono-lg); color: var(--accent); white-space: nowrap; }
+  .badge {
+    display: inline-block;
+    border: 1px solid var(--border-hi);
+    color: var(--accent);
+    font-family: var(--f-mono);
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
     border-radius: 6px;
     padding: 2px 7px;
     margin-left: 8px;
+    vertical-align: 2px;
+    white-space: nowrap;
   }
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
-    list-style: none;
-  }
-  .step {
+  .need, .extras { color: var(--sub); font-size: var(--fs-meta); line-height: 1.5; margin-top: 8px; }
+  .i-check { color: var(--accent); }
+  .i-plus { color: var(--sub); }
+  .need .i, .extras .i { vertical-align: -2px; margin-right: 7px; }
+
+  /* ---------- Таблица «цены против рынка» ---------- */
+  .mkt-wrap {
     background: var(--card);
-    border: 1px solid var(--chip);
-    border-radius: 14px;
-    padding: 16px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    max-width: 860px;
+    overflow-x: auto;
   }
-  .num {
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 15px;
-    background: var(--chip);
-    border-radius: 8px;
-    padding: 4px 9px;
-    flex: none;
-  }
-  .step p { font-size: 14.5px; }
-  .how {
-    background: var(--card);
-    border: 1px solid var(--chip);
-    border-radius: 14px;
-    padding: 18px;
-    font-size: 15px;
-    max-width: 760px;
-  }
-  .how p + p { margin-top: 10px; color: var(--txt); }
-  .cta {
-    display: block;
-    text-align: center;
-    background: var(--btn);
-    color: #FFFFFF;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 15px 20px;
-    border-radius: 10px;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-  .cta span { color: var(--accent); }
-  .cta:hover { filter: brightness(1.1); }
-  .cta-inline {
-    display: inline-block;
-    background: var(--btn);
-    color: #FFFFFF;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 15px;
-    padding: 12px 20px;
-    border-radius: 10px;
-    margin-top: 16px;
-  }
-  .cta-inline span { color: var(--accent); }
-  .cta-inline:hover { filter: brightness(1.1); }
-  .cta-note { text-align: center; color: var(--sub); font-size: 13.5px; margin-top: 12px; }
-  .lead-magnet {
-    background: var(--card);
-    border: 1px solid var(--accent);
-    border-radius: 12px;
-    padding: 14px 16px;
-    max-width: 480px;
-    margin: 14px auto 0;
-    font-size: 14px;
-    text-align: center;
-  }
-  .lead-magnet strong { color: var(--accent); }
-  .hero-numbers { margin-top: 10px; font-size: 14.5px; font-weight: 600; }
-  .hero-numbers strong { color: var(--accent); }
-  .cta-mini { color: var(--sub); font-size: 13px; margin-top: 10px; }
-  .need, .extras { color: var(--sub); font-size: 12.5px; margin: 4px 0 0; width: 100%; }
-  .mkt { width: 100%; border-collapse: collapse; max-width: 860px; font-size: 13.5px; }
-  .mkt th, .mkt td { border: 1px solid var(--chip); padding: 8px 10px; text-align: left; vertical-align: top; }
-  .mkt th { background: var(--card); color: var(--txt); font-size: 13px; }
-  .mkt td { background: var(--card); color: var(--sub); }
-  .mkt td:first-child { color: var(--txt); font-weight: 600; }
-  .mkt .mine { color: var(--accent); font-weight: 700; white-space: nowrap; }
-  .foot {
+  .mkt { width: 100%; min-width: 640px; border-collapse: collapse; font-size: var(--fs-sm); }
+  .mkt th {
+    font-family: var(--f-mono);
+    font-weight: 600;
+    font-size: var(--fs-mono-sm);
+    text-transform: uppercase;
+    letter-spacing: .06em;
     color: var(--sub);
-    font-size: 12.5px;
-    margin-top: 28px;
-    border-top: 1px solid var(--chip);
-    padding-top: 16px;
+    text-align: left;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border);
   }
-  .foot a { color: var(--accent); }
-  .foot .stack { margin-top: 6px; color: var(--txt); font-size: 13px; font-weight: 600; letter-spacing: .5px; }
+  .mkt td { padding: 13px 16px; border-bottom: 1px solid var(--border); color: var(--sub); }
+  .mkt tr:last-child td { border-bottom: 0; }
+  .mkt td:first-child { color: var(--txt); font-weight: 500; }
+  .mkt .mine { font-family: var(--f-mono); font-weight: 700; color: var(--accent); background: rgba(52,211,153,.06); white-space: nowrap; }
+
+  /* ---------- Снижение риска ---------- */
+  .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; }
+  .step { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-card); padding: 20px; }
+  .step-num { display: block; font-family: var(--f-mono); font-weight: 700; font-size: clamp(26px, 2vw, 28px); line-height: 1; color: var(--accent); margin-bottom: 14px; }
+  .step-ico {
+    position: absolute; top: 18px; right: 18px;
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--chip);
+    color: var(--sub);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step p { font-size: var(--fs-sm); }
+
+  /* ---------- Финальный CTA ---------- */
+  .glow-panel {
+    background: radial-gradient(560px 240px at 50% 0%, var(--glow), transparent 72%), var(--card);
+    border: 1px solid rgba(52,211,153,.30);
+    border-radius: var(--r-panel);
+    padding: 44px 24px 36px;
+    text-align: center;
+  }
+  .cta { display: inline-block; font-size: 16px; padding: 17px 30px; border-radius: 12px; }
+  .cta .i { margin-left: 10px; vertical-align: -3px; }
+  .lead-magnet {
+    border: 1px solid var(--border-hi);
+    border-radius: 12px;
+    padding: 16px 20px;
+    max-width: 560px;
+    margin: 20px auto 0;
+    font-size: var(--fs-sm);
+    text-align: left;
+  }
+  .lead-magnet .i { color: var(--accent); vertical-align: -3px; margin-right: 8px; }
+  .lead-magnet strong { color: var(--accent); font-weight: 500; }
+  .cta-note { font-family: var(--f-mono); font-weight: 600; font-size: var(--fs-mono-sm); color: var(--sub); margin-top: 16px; }
+
+  /* ---------- Footer ---------- */
+  .foot-band { border-top: 1px solid var(--border); background: var(--bg); }
+  .foot { padding-block: 30px 44px; color: var(--sub); font-size: var(--fs-meta); }
+  .foot p + p { margin-top: 8px; }
+  .foot .stack { font-family: var(--f-mono); font-weight: 600; font-size: var(--fs-mono-sm); letter-spacing: .04em; color: var(--sub); margin-top: 12px; }
+
+  /* ---------- Адаптив ---------- */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .hero-right { max-width: 560px; }
+  }
   @media (max-width: 700px) {
-    .wrap { padding: 26px 14px 40px; }
-    h1 { font-size: 22px; }
-    .sub { font-size: 14.5px; }
-    section > h2 { font-size: 18px; }
-    .grid, .cases, .steps { grid-template-columns: 1fr; }
-    .cta { font-size: 15px; }
+    .cases, .cases-2, .steps { grid-template-columns: 1fr; }
+    .glow-panel { padding: 32px 18px 28px; }
+    .cta { display: block; }
+    .cta-inline { display: block; text-align: center; }
+  }
+  @media (max-width: 560px) {
+    .hero-right { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <h1>Превращаю ручную рутину бизнеса в системы, которые работают сами</h1>
-    <p class="sub">Java-разработчик — интеграции API, боты, автоматизация процессов под ключ.</p>
-    <p class="hero-numbers"><strong>3 открытых демо-проекта</strong> · <strong>41 автотест</strong> · Java 21 + Spring Boot</p>
-    <ul class="tags">
-      <li class="tag">Java 21</li>
-      <li class="tag">Spring Boot</li>
-      <li class="tag">Python</li>
-      <li class="tag">REST API</li>
-      <li class="tag">PostgreSQL</li>
-      <li class="tag">Telegram Bot API</li>
-    </ul>
-    <a class="cta-inline" href="https://t.me/iconzrus">Написать в Telegram: <span>@iconzrus</span></a>
-    <p class="cta-mini">Отвечаю в течение часа в рабочее время.</p>
-  </header>
-
-  <section>
-    <h2>Технические демо</h2>
-    <div class="cases">
-      <div class="case">
-        <h3>ai-food-helper</h3>
-        <p class="meta">техническое демо · обновлён 2026-06-10 · код открыт на GitHub</p>
-        <p class="pitch"><span class="lbl">Задача.</span> Разбирать состав продукта по фото, штрихкоду или тексту и получать честный вердикт без ручного анализа.</p>
-        <p class="pitch"><span class="lbl">Решение.</span> Telegram-бот с AI-вердиктами «Можно / Осторожно / Не брать»: Yandex Vision OCR + rule engine, метрики качества (/stats), 6 команд — /start, /profile, /history и другие.</p>
-        <p class="digit"><strong>41 автотест</strong> — сборка BUILD SUCCESS; regression-тесты на реальных составах (CompositionSamplesTest).</p>
-        <ul class="tags">
-          <li class="tag">Java</li>
-          <li class="tag">Spring Boot</li>
-          <li class="tag">PostgreSQL</li>
-          <li class="tag">Telegram Bot API</li>
-        </ul>
-        <a class="case-link" href="https://github.com/iconzrus/ai-food-helper" target="_blank" rel="noopener">Смотреть код</a>
-      </div>
-      <div class="case">
-        <img src="case1_bot.png" alt="Конвейер freelance-bot: парсер биржи → AI-фильтр → отклик в Telegram">
-        <h3>freelance-bot</h3>
-        <p class="meta">техническое демо · Python · локальный инструмент</p>
-        <p class="pitch"><span class="lbl">Задача.</span> Ручной поиск заказов на бирже и написание каждого отклика съедают часы.</p>
-        <p class="pitch"><span class="lbl">Решение.</span> Конвейер: парсер Kwork → AI-оценка заказа 0–10 по стеку и бюджету → готовый AIDA-отклик → Telegram. SQLite-дедуп заявок (orders.db) и DRY_RUN-режим для безопасного прогона.</p>
-        <p class="digit"><strong>≈ 500 токенов</strong> на один обработанный заказ; 4 тест-скрипта.</p>
-        <ul class="tags">
-          <li class="tag">Python</li>
-          <li class="tag">SQLite</li>
-          <li class="tag">Telegram Bot API</li>
-        </ul>
-        <span class="plaque">локальный инструмент</span>
-      </div>
-      <div class="case">
-        <h3>marketplace-helper</h3>
-        <p class="meta">техническое демо · обновлён 2025-10-13 · код открыт на GitHub</p>
-        <p class="pitch"><span class="lbl">Задача.</span> Сводить Excel-выгрузки маркетплейса и считать маржинальность по каждому SKU вручную.</p>
-        <p class="pitch"><span class="lbl">Решение.</span> Полный стек под e-com: импорт корпоративного Excel, сведение карточек по nmId и vendorCode, расчёт маржинальности WB по каждому SKU.</p>
-        <p class="digit"><strong>Честный MVP:</strong> интеграция с WB API работает на моках.</p>
-        <ul class="tags">
-          <li class="tag">Java 21</li>
-          <li class="tag">Spring Boot 3.2</li>
-          <li class="tag">React 18</li>
-          <li class="tag">Apache POI</li>
-        </ul>
-        <a class="case-link" href="https://github.com/iconzrus/marketplace-helper" target="_blank" rel="noopener">Смотреть код</a>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-left">
+      <h1>Превращаю ручную рутину бизнеса в системы, которые работают сами</h1>
+      <p class="sub">Java-разработчик — интеграции API, боты, автоматизация процессов под ключ.</p>
+      <p class="hero-numbers"><strong>3 открытых демо-проекта</strong> · <strong>41 автотест</strong> · Java 21 + Spring Boot</p>
+      <ul class="tags">
+        <li class="tag">Java 21</li>
+        <li class="tag">Spring Boot</li>
+        <li class="tag">Python</li>
+        <li class="tag">REST API</li>
+        <li class="tag">PostgreSQL</li>
+        <li class="tag">Telegram Bot API</li>
+      </ul>
+      <a class="btn-solid cta-inline" href="https://t.me/iconzrus">Написать в Telegram: <span class="handle">@iconzrus</span></a>
+      <p class="cta-mini">Отвечаю в течение часа в рабочее время.</p>
+    </div>
+    <div class="hero-right" aria-hidden="true">
+      <div class="term">
+        <div class="term-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot dot-ok"></span>
+          <span class="term-name"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>~/automation</span>
+        </div>
+        <div class="term-body">
+          <p class="t-line t-dim">$ deploy telegram-bot --fix-price</p>
+          <p class="t-line"><span class="ok">[ok]</span> Telegram-бот под ключ — 5–7 дней</p>
+          <p class="t-line"><span class="ok">[ok]</span> Интеграция API — без ручного переноса</p>
+          <p class="t-line"><span class="ok">[ok]</span> 41 автотест · BUILD SUCCESS</p>
+          <p class="t-line"><span class="ok">[ok]</span> Правки 2 недели · ответ &lt; 1ч</p>
+          <p class="t-line t-dim">$ сообщи рутину — вернусь с планом и ценой<span class="cursor">▍</span></p>
+        </div>
       </div>
     </div>
-    <p class="note">Это технические демо — собственные проекты, код открыт на GitHub, а не клиентские результаты.</p>
-  </section>
+  </div>
+</header>
 
-  <section>
-    <h2>Как работаю</h2>
-    <div class="how">
-      <p>Разбираем задачу → фиксируем объём, срок и цену до старта → делаю, показывая промежуточные результаты → сдаю с инструкцией. Каждый этап заканчивается работающим результатом, который можно проверить.</p>
-      <p>Если задача выходит за рамки моего опыта — скажу прямо, а не возьмусь вслепую.</p>
-    </div>
-  </section>
+<main>
 
-  <section>
-    <h2>Готовые сценарии под ключ</h2>
-    <div class="cases">
-      <div class="case">
-        <h3>Бот записи клиентов под ключ</h3>
-        <p class="meta">узкий продукт на базе «Telegram-бот под ключ» · от 7 000 ₽ · 5–7 дней</p>
-        <p class="pitch"><span class="lbl">Состав.</span> Приём и запись заявок 24/7, ответы на типовые вопросы, передача заявок в таблицу или CRM; нестандартные ситуации бот передаёт человеку. Деплой на сервер и инструкция по управлению.</p>
-        <p class="digit"><strong>Правки 2 недели</strong> включены · код, сервер и доступы остаются у вас.</p>
-        <a class="case-link" href="https://t.me/iconzrus">Обсудить запись клиентов</a>
+  <section class="sec sec-base">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-idx" aria-hidden="true">01</span><h2>Технические демо</h2></div>
+      <div class="cases">
+        <div class="case">
+          <span class="chip-demo">техническое демо</span>
+          <h3>ai-food-helper</h3>
+          <p class="meta">обновлён 2026-06-10 · код открыт на GitHub</p>
+          <p class="pitch"><span class="lbl">Задача.</span> Разбирать состав продукта по фото, штрихкоду или тексту и получать честный вердикт без ручного анализа.</p>
+          <p class="pitch"><span class="lbl">Решение.</span> Telegram-бот с AI-вердиктами «Можно / Осторожно / Не брать»: Yandex Vision OCR + rule engine, метрики качества (/stats), 6 команд — /start, /profile, /history и другие.</p>
+          <p class="digit"><strong>41 автотест</strong> — сборка BUILD SUCCESS; regression-тесты на реальных составах (CompositionSamplesTest).</p>
+          <ul class="tags">
+            <li class="tag">Java</li>
+            <li class="tag">Spring Boot</li>
+            <li class="tag">PostgreSQL</li>
+            <li class="tag">Telegram Bot API</li>
+          </ul>
+          <a class="case-link" href="https://github.com/iconzrus/ai-food-helper" target="_blank" rel="noopener">Смотреть код</a>
+        </div>
+        <div class="case">
+          <div class="win">
+            <div class="win-bar"><span class="dot"></span><span class="dot"></span><span class="dot dot-ok"></span></div>
+            <img class="win-img" src="case1_bot.png" alt="Конвейер freelance-bot: парсер биржи → AI-фильтр → отклик в Telegram">
+          </div>
+          <h3>freelance-bot</h3>
+          <p class="meta">техническое демо · Python · локальный инструмент</p>
+          <p class="pitch"><span class="lbl">Задача.</span> Ручной поиск заказов на бирже и написание каждого отклика съедают часы.</p>
+          <p class="pitch"><span class="lbl">Решение.</span> Конвейер: парсер Kwork → AI-оценка заказа 0–10 по стеку и бюджету → готовый AIDA-отклик → Telegram. SQLite-дедуп заявок (orders.db) и DRY_RUN-режим для безопасного прогона.</p>
+          <p class="digit"><strong>≈ 500 токенов</strong> на один обработанный заказ; 4 тест-скрипта.</p>
+          <ul class="tags">
+            <li class="tag">Python</li>
+            <li class="tag">SQLite</li>
+            <li class="tag">Telegram Bot API</li>
+          </ul>
+        </div>
+        <div class="case">
+          <span class="chip-demo">техническое демо</span>
+          <h3>marketplace-helper</h3>
+          <p class="meta">обновлён 2025-10-13 · код открыт на GitHub</p>
+          <p class="pitch"><span class="lbl">Задача.</span> Сводить Excel-выгрузки маркетплейса и считать маржинальность по каждому SKU вручную.</p>
+          <p class="pitch"><span class="lbl">Решение.</span> Полный стек под e-com: импорт корпоративного Excel, сведение карточек по nmId и vendorCode, расчёт маржинальности WB по каждому SKU.</p>
+          <p class="digit"><strong>Честный MVP:</strong> интеграция с WB API работает на моках.</p>
+          <ul class="tags">
+            <li class="tag">Java 21</li>
+            <li class="tag">Spring Boot 3.2</li>
+            <li class="tag">React 18</li>
+            <li class="tag">Apache POI</li>
+          </ul>
+          <a class="case-link" href="https://github.com/iconzrus/marketplace-helper" target="_blank" rel="noopener">Смотреть код</a>
+        </div>
       </div>
-      <div class="case">
-        <h3>Парсер цен конкурентов по расписанию</h3>
-        <p class="meta">узкий продукт на базе «Парсер / сбор данных» · от 5 000 ₽ · 3–4 дня</p>
-        <p class="pitch"><span class="lbl">Состав.</span> Ежедневный мониторинг цен конкурентов с сайта-источника → выгрузка в Excel / Google Таблицы, повторный запуск по расписанию. Объём и срок фиксируем после проверки доступности данных.</p>
-        <p class="digit"><strong>Правки 2 недели</strong> включены · код и данные остаются у вас.</p>
-        <a class="case-link" href="https://t.me/iconzrus">Обсудить мониторинг цен</a>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Услуги и цены</h2>
-    <ul class="prices">
-      <li>
-        <span class="pos">Telegram-бот под ключ</span><span class="amount">от 7 000 ₽ · 5–7 дней</span>
-        <p class="need">Нужно от вас: описание задачи своими словами — консультация и помощь с формулировкой логики входят в работу.</p>
-        <p class="extras">Дополнительно: AI-фильтр заявок · интеграция оплаты · админ-панель</p>
-      </li>
-      <li>
-        <span class="pos">Парсер / сбор данных</span><span class="amount">от 5 000 ₽ · 3–4 дня</span>
-        <p class="need">Нужно от вас: сайт-источник и список нужных полей.</p>
-        <p class="extras">Дополнительно: AI-фильтрация собранных данных · автопередача в CRM/таблицы</p>
-      </li>
-      <li>
-        <span class="pos">Интеграция API / обмен данными между системами</span><span class="amount">от 8 000 ₽ · 5–7 дней</span>
-        <p class="need">Нужно от вас: какие сервисы связать, доступы или API-документация обеих сторон.</p>
-        <p class="extras">Дополнительно: AI-обработка данных в обмене · дашборд</p>
-      </li>
-      <li>
-        <span class="pos">Автоматизация процесса под ключ</span><span class="amount">от 9 000 ₽ · 7–10 дней</span>
-        <p class="need">Нужно от вас: описание процесса — что, откуда, куда, как часто.</p>
-        <p class="extras">Дополнительно: интеграция оплаты · админ-панель</p>
-      </li>
-      <li>
-        <span class="pos">Починка / аудит существующего бота или скрипта</span><span class="amount">от 2 500 ₽ · 1–2 дня</span>
-        <p class="need">Нужно от вас: описание проблемы и доступ к коду/серверу, если есть.</p>
-        <p class="extras">Дополнительно: перенос на сервер с автозапуском · алерты о падениях в Telegram</p>
-      </li>
-      <li>
-        <span class="pos">Интеграция с 1С<span class="badge">дополнительно</span></span><span class="amount">от 12 000 ₽ · 7–10 дней</span>
-        <p class="need">Нужно от вас: какая у вас 1С и что связать (можно своими словами), пример данных или доступ в тестовый контур.</p>
-        <p class="extras">Дополнительно: расширение обмена на новые документы · дашборд по данным обмена</p>
-      </li>
-    </ul>
-    <p class="note">Точная цена фиксируется до старта по объёму задачи. В состав каждой позиции входит разработка, тестирование, деплой/настройка и инструкция по управлению.</p>
-  </section>
-
-  <section>
-    <h2>Мои цены против рынка</h2>
-    <table class="mkt">
-      <thead>
-        <tr><th>Позиция</th><th>Мой прайс</th><th>Биржи (Kwork · Profi)</th><th>Студии (лендинги)</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Telegram-бот под ключ</td><td class="mine">7 000 ₽</td><td>медиана 3 000 ₽ (10 базовых кворков)</td><td>10 000–16 000 ₽</td></tr>
-        <tr><td>Интеграция API / обмен данными</td><td class="mine">8 000 ₽</td><td>2 740–3 500 ₽</td><td>32 000–40 000 ₽</td></tr>
-        <tr><td>Починка / аудит</td><td class="mine">2 500 ₽</td><td>500–1 000 ₽</td><td>—</td></tr>
-      </tbody>
-    </table>
-    <p class="note">Данные 2026-10; продажи Kwork — срез 2025-02, прайсы студий — 2026-09. Источник: анализ упаковки конкурентов 2026-10-31. Позиции, по которым рыночных данных недостаточно (парсер, автоматизация, 1С), в таблицу не включены; студийных прайсов на починку в выборке нет.</p>
-  </section>
-
-  <section>
-    <h2>Снижение риска</h2>
-    <ol class="steps">
-      <li class="step"><span class="num">1</span><p>Правки 2 недели включены</p></li>
-      <li class="step"><span class="num">2</span><p>Код, сервер и все доступы после сдачи остаются у вас</p></li>
-      <li class="step"><span class="num">3</span><p>Цена фиксируется до старта по объёму задачи</p></li>
-    </ol>
-  </section>
-
-  <section>
-    <h2>Честно: что не входит в цену и с чем я не работаю</h2>
-    <div class="how">
-      <p>В цену не входят: новые функции после приёмки, регулярное сопровождение и расходники — сервер, лимиты платных API. Это отдельно, по согласованию.</p>
-      <p>1С-интеграции — дополнительный сегмент, а не основной фокус: ядро моей работы — Java, автоматизация и интеграции API.</p>
-      <p>Если задача вне моего опыта — скажу прямо, а не возьмусь вслепую.</p>
+      <p class="note">Это технические демо — собственные проекты, код открыт на GitHub, а не клиентские результаты.</p>
     </div>
   </section>
 
-  <section>
-    <h2>Обсудить задачу</h2>
-    <a class="cta" href="https://t.me/iconzrus">Написать в Telegram: <span>@iconzrus</span></a>
-    <div class="lead-magnet">
-      <strong>Бесплатный аудит автоматизации:</strong> опишите в Telegram вашу рутину в 3–5 строк — за 1 день вернусь с планом автоматизации и точной ценой. Без оплаты и обязательств: сначала польза, потом разговор.
+  <section class="sec sec-band">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-idx" aria-hidden="true">02</span><h2>Как работаю</h2></div>
+      <div class="how">
+        <div class="how-lead">
+          <span class="how-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          <p>Разбираем задачу → фиксируем объём, срок и цену до старта → делаю, показывая промежуточные результаты → сдаю с инструкцией. Каждый этап заканчивается работающим результатом, который можно проверить.</p>
+        </div>
+        <p class="how-sep" aria-hidden="true">· · ·</p>
+        <p class="how-more">Если задача выходит за рамки моего опыта — скажу прямо, а не возьмусь вслепую.</p>
+      </div>
     </div>
-    <p class="cta-note">Отвечаю в течение часа в рабочее время · правки 2 недели включены · доступы остаются у вас · цена фиксируется до старта</p>
-    <!-- [ВЛАДЕЛЕЦ: подключить cal.com виджет] -->
   </section>
 
-  <footer class="foot">
+  <section class="sec sec-base">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-idx" aria-hidden="true">03</span><h2>Готовые сценарии под ключ</h2></div>
+      <div class="cases cases-2">
+        <div class="case">
+          <h3>Бот записи клиентов под ключ</h3>
+          <p class="meta">узкий продукт на базе «Telegram-бот под ключ» · <span class="price-hi">от 7 000 ₽</span> · 5–7 дней</p>
+          <p class="pitch"><span class="lbl">Состав.</span> Приём и запись заявок 24/7, ответы на типовые вопросы, передача заявок в таблицу или CRM; нестандартные ситуации бот передаёт человеку. Деплой на сервер и инструкция по управлению.</p>
+          <p class="digit"><strong>Правки 2 недели</strong> включены · код, сервер и доступы остаются у вас.</p>
+          <a class="case-link" href="https://t.me/iconzrus">Обсудить запись клиентов</a>
+        </div>
+        <div class="case">
+          <h3>Парсер цен конкурентов по расписанию</h3>
+          <p class="meta">узкий продукт на базе «Парсер / сбор данных» · <span class="price-hi">от 5 000 ₽</span> · 3–4 дня</p>
+          <p class="pitch"><span class="lbl">Состав.</span> Ежедневный мониторинг цен конкурентов с сайта-источника → выгрузка в Excel / Google Таблицы, повторный запуск по расписанию. Объём и срок фиксируем после проверки доступности данных.</p>
+          <p class="digit"><strong>Правки 2 недели</strong> включены · код и данные остаются у вас.</p>
+          <a class="case-link" href="https://t.me/iconzrus">Обсудить мониторинг цен</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-band">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-idx" aria-hidden="true">04</span><h2>Услуги и цены</h2></div>
+      <ul class="prices">
+        <li class="price-flag">
+          <div class="price-row"><span class="pos">Telegram-бот под ключ</span><span class="amount">от 7 000 ₽ · 5–7 дней</span></div>
+          <p class="need"><svg class="i i-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Нужно от вас: описание задачи своими словами — консультация и помощь с формулировкой логики входят в работу.</p>
+          <p class="extras"><svg class="i i-plus" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Дополнительно: AI-фильтр заявок · интеграция оплаты · админ-панель</p>
+        </li>
+        <li>
+          <div class="price-row"><span class="pos">Парсер / сбор данных</span><span class="amount">от 5 000 ₽ · 3–4 дня</span></div>
+          <p class="need"><svg class="i i-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Нужно от вас: сайт-источник и список нужных полей.</p>
+          <p class="extras"><svg class="i i-plus" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Дополнительно: AI-фильтрация собранных данных · автопередача в CRM/таблицы</p>
+        </li>
+        <li>
+          <div class="price-row"><span class="pos">Интеграция API / обмен данными между системами</span><span class="amount">от 8 000 ₽ · 5–7 дней</span></div>
+          <p class="need"><svg class="i i-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Нужно от вас: какие сервисы связать, доступы или API-документация обеих сторон.</p>
+          <p class="extras"><svg class="i i-plus" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Дополнительно: AI-обработка данных в обмене · дашборд</p>
+        </li>
+        <li>
+          <div class="price-row"><span class="pos">Автоматизация процесса под ключ</span><span class="amount">от 9 000 ₽ · 7–10 дней</span></div>
+          <p class="need"><svg class="i i-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Нужно от вас: описание процесса — что, откуда, куда, как часто.</p>
+          <p class="extras"><svg class="i i-plus" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Дополнительно: интеграция оплаты · админ-панель</p>
+        </li>
+        <li>
+          <div class="price-row"><span class="pos">Починка / аудит существующего бота или скрипта</span><span class="amount">от 2 500 ₽ · 1–2 дня</span></div>
+          <p class="need"><svg class="i i-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Нужно от вас: описание проблемы и доступ к коду/серверу, если есть.</p>
+          <p class="extras"><svg class="i i-plus" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Дополнительно: перенос на сервер с автозапуском · алерты о падениях в Telegram</p>
+        </li>
+        <li>
+          <div class="price-row"><span class="pos">Интеграция с 1С<span class="badge">дополнительно</span></span><span class="amount">от 12 000 ₽ · 7–10 дней</span></div>
+          <p class="need"><svg class="i i-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Нужно от вас: какая у вас 1С и что связать (можно своими словами), пример данных или доступ в тестовый контур.</p>
+          <p class="extras"><svg class="i i-plus" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Дополнительно: расширение обмена на новые документы · дашборд по данным обмена</p>
+        </li>
+      </ul>
+      <p class="note">Точная цена фиксируется до старта по объёму задачи. В состав каждой позиции входит разработка, тестирование, деплой/настройка и инструкция по управлению.</p>
+    </div>
+  </section>
+
+  <section class="sec sec-base">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-idx" aria-hidden="true">05</span><h2>Мои цены против рынка</h2></div>
+      <div class="mkt-wrap">
+        <table class="mkt">
+          <thead>
+            <tr><th>Позиция</th><th>Мой прайс</th><th>Биржи (Kwork · Profi)</th><th>Студии (лендинги)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Telegram-бот под ключ</td><td class="mine">7 000 ₽</td><td>медиана 3 000 ₽ (10 базовых кворков)</td><td>10 000–16 000 ₽</td></tr>
+            <tr><td>Интеграция API / обмен данными</td><td class="mine">8 000 ₽</td><td>2 740–3 500 ₽</td><td>32 000–40 000 ₽</td></tr>
+            <tr><td>Починка / аудит</td><td class="mine">2 500 ₽</td><td>500–1 000 ₽</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Данные 2026-10; продажи Kwork — срез 2025-02, прайсы студий — 2026-09. Источник: анализ упаковки конкурентов 2026-10-31. Позиции, по которым рыночных данных недостаточно (парсер, автоматизация, 1С), в таблицу не включены; студийных прайсов на починку в выборке нет.</p>
+    </div>
+  </section>
+
+  <section class="sec sec-base">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-idx" aria-hidden="true">06</span><h2>Снижение риска</h2></div>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-num" aria-hidden="true">01</span>
+          <span class="step-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+          <p>Правки 2 недели включены</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">02</span>
+          <span class="step-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></span>
+          <p>Код, сервер и все доступы после сдачи остаются у вас</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">03</span>
+          <span class="step-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <p>Цена фиксируется до старта по объёму задачи</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec sec-band">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-idx" aria-hidden="true">07</span><h2>Честно: что не входит в цену и с чем я не работаю</h2></div>
+      <div class="how honest">
+        <p>В цену не входят: новые функции после приёмки, регулярное сопровождение и расходники — сервер, лимиты платных API. Это отдельно, по согласованию.</p>
+        <p>1С-интеграции — дополнительный сегмент, а не основной фокус: ядро моей работы — Java, автоматизация и интеграции API.</p>
+        <p>Если задача вне моего опыта — скажу прямо, а не возьмусь вслепую.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-base">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-idx" aria-hidden="true">08</span><h2>Обсудить задачу</h2></div>
+      <div class="glow-panel">
+        <a class="btn-solid cta" href="https://t.me/iconzrus">Написать в Telegram: <span class="handle">@iconzrus</span><svg class="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <div class="lead-magnet">
+          <p><svg class="i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><strong>Бесплатный аудит автоматизации:</strong> опишите в Telegram вашу рутину в 3–5 строк — за 1 день вернусь с планом автоматизации и точной ценой. Без оплаты и обязательств: сначала польза, потом разговор.</p>
+        </div>
+        <p class="cta-note">Отвечаю в течение часа в рабочее время · правки 2 недели включены · доступы остаются у вас · цена фиксируется до старта</p>
+        <!-- [ВЛАДЕЛЕЦ: подключить cal.com виджет] -->
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot-band">
+  <div class="wrap foot">
     <p>Все кейсы — технические демо: собственные проекты автора. Числа и ссылки проверяемы.</p>
     <p>Исходники этого сайта: <a href="https://github.com/iconzrus/cases" target="_blank" rel="noopener">github.com/iconzrus/cases</a></p>
     <p class="stack">Java 21 · Spring Boot · Python · REST API · PostgreSQL · Telegram Bot API</p>
-  </footer>
+  </div>
+</footer>
 
-</div>
 </body>
 </html>
