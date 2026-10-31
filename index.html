@@ -442,9 +442,9 @@
           <span class="chip-demo">техническое демо</span>
           <h3>ai-food-helper</h3>
           <p class="meta">обновлён 2026-06-10 · код открыт на GitHub</p>
-          <p class="pitch"><span class="lbl">Задача.</span> Разбирать состав продукта по фото, штрихкоду или тексту и получать честный вердикт без ручного анализа.</p>
-          <p class="pitch"><span class="lbl">Решение.</span> Telegram-бот с AI-вердиктами «Можно / Осторожно / Не брать»: Yandex Vision OCR + rule engine, метрики качества (/stats), 6 команд — /start, /profile, /history и другие.</p>
-          <p class="digit"><strong>41 автотест</strong> — сборка BUILD SUCCESS; regression-тесты на реальных составах (CompositionSamplesTest).</p>
+          <p class="digit"><strong>Проверка составов без ручного анализа</strong>: AI-вердикт «Можно / Осторожно / Не брать» по фото, штрихкоду или тексту.</p>
+          <p class="pitch"><span class="lbl">Решение.</span> Telegram-бот: Yandex Vision OCR + rule engine, метрики качества (/stats), 6 команд — /start, /profile, /history и другие.</p>
+          <p class="digit"><strong>41 автотест</strong> — сборка BUILD SUCCESS; regression-тесты на 45 эталонных составах (CompositionSamplesTest).</p>
           <ul class="tags">
             <li class="tag">Java</li>
             <li class="tag">Spring Boot</li>
@@ -460,9 +460,9 @@
           </div>
           <h3>freelance-bot</h3>
           <p class="meta">техническое демо · Python · локальный инструмент</p>
+          <p class="digit"><strong>24 заказа</strong> обработаны конвейером (прогон 2026-09): подходящий заказ и готовый отклик — в Telegram за минуты.</p>
           <p class="pitch"><span class="lbl">Задача.</span> Ручной поиск заказов на бирже и написание каждого отклика съедают часы.</p>
           <p class="pitch"><span class="lbl">Решение.</span> Конвейер: парсер Kwork → AI-оценка заказа 0–10 по стеку и бюджету → готовый AIDA-отклик → Telegram. SQLite-дедуп заявок (orders.db) и DRY_RUN-режим для безопасного прогона.</p>
-          <p class="digit"><strong>≈ 500 токенов</strong> на один обработанный заказ; 4 тест-скрипта.</p>
           <ul class="tags">
             <li class="tag">Python</li>
             <li class="tag">SQLite</li>
@@ -473,16 +473,20 @@
           <span class="chip-demo">техническое демо</span>
           <h3>marketplace-helper</h3>
           <p class="meta">обновлён 2025-10-13 · код открыт на GitHub</p>
+          <p class="digit"><strong>Загрузка корпоративного Excel → маржинальность по каждому SKU и сведение карточек WB</strong> — интерфейс уже живой онлайн.</p>
           <p class="pitch"><span class="lbl">Задача.</span> Сводить Excel-выгрузки маркетплейса и считать маржинальность по каждому SKU вручную.</p>
           <p class="pitch"><span class="lbl">Решение.</span> Полный стек под e-com: импорт корпоративного Excel, сведение карточек по nmId и vendorCode, расчёт маржинальности WB по каждому SKU.</p>
-          <p class="digit"><strong>Честный MVP:</strong> интеграция с WB API работает на моках.</p>
+          <p class="digit"><strong>Режим демо:</strong> работает на демо-данных; реальный WB API подключается по WB_API_SETUP.md.</p>
           <ul class="tags">
             <li class="tag">Java 21</li>
             <li class="tag">Spring Boot 3.2</li>
             <li class="tag">React 18</li>
             <li class="tag">Apache POI</li>
           </ul>
-          <a class="case-link" href="https://github.com/iconzrus/marketplace-helper" target="_blank" rel="noopener">Смотреть код</a>
+          <div style="margin-top:auto; display:flex; gap:10px; flex-wrap:wrap; align-items:flex-start;">
+            <a class="case-link" style="margin-top:0" href="https://iconzrus.github.io/marketplace-helper/" target="_blank" rel="noopener">Открыть демо</a>
+            <a class="case-link" style="margin-top:0" href="https://github.com/iconzrus/marketplace-helper" target="_blank" rel="noopener">Смотреть код</a>
+          </div>
         </div>
       </div>
       <p class="note">Это технические демо — собственные проекты, код открыт на GitHub, а не клиентские результаты.</p>
